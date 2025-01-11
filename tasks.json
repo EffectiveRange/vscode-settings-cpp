@@ -1,0 +1,35 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "clean lcov coverage",
+            "type": "shell",
+            "command": "find ${workspaceFolder} -name \\*.gcda -exec rm -vf {} \\; ",
+            "problemMatcher": [
+                "$eslint-compact"
+            ]
+        },
+        {
+            "label": "generate lcov coverage",
+            "type": "shell",
+            "command": "mkdir -p ${workspaceFolder}/coverage && cd ${workspaceFolder}/coverage && gcovr  --root .. -e \"../test.*\"  -e \"../build.*\" $([ -f ../exclude-coverage.txt ] && awk '{printf \"-e ../%s \", $0}' ../exclude-coverage.txt) --exclude-throw-branches --exclude-noncode-lines --exclude-function-lines --exclude-unreachable-branches --lcov lcov.info",
+            "problemMatcher": [
+                "$eslint-compact"
+            ]
+        },
+        {
+            "label": "clean & generate lcov coverage",
+            "type": "shell",
+            "dependsOn": [
+                "clean lcov coverage",
+                "generate lcov coverage"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": [
+                "$eslint-compact"
+            ]
+        },
+    ]
+}

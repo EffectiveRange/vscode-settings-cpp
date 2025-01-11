@@ -1,0 +1,27 @@
+buildType:
+  default: debug
+  choices:
+    debug:
+      short: Debug
+      long: Emit debug information
+      buildType: Debug
+    release:
+      short: Release
+      long: Optimize generated code
+      buildType: RelWithDebugInfo
+    coverage:
+      short: Coverage
+      long: Build with coverage instrumentation
+      buildType: Coverage
+    asan:
+      short: AddressSanitizer
+      long: Build with AddressSanitizer instrumentation
+      buildType: ASan
+    tsan:
+      short: ThreadSanitizer
+      long: Build with ThreadSanitizer instrumentation
+      buildType: TSan
+    ubsan:
+      short: UndefinedBehaviorSanitizer
+      long: Build with UndefinedBehaviorSanitizer instrumentation
+      buildType: UBSan  
