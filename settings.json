@@ -1,0 +1,52 @@
+{
+    "testMate.cpp.debug.configTemplate": {
+        "type": "cppvsdbg",
+        "linux": {
+            "type": "cppdbg",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "logging": {
+                "engineLogging": false
+            }
+        },
+        "program": "${exec}",
+        "args": "${argsArray}",
+        "cwd": "${cwd}",
+        "env": "${envObj}",
+        "environment": "${envObjArray}",
+        "sourceFileMap": "${sourceFileMapObj}",
+    },
+    "testMate.cpp.test.advancedExecutables": [
+        {
+            "pattern": "{build,Build,BUILD,out,Out,OUT}/**/*{test,Test,TEST}*",
+            "cwd": "${absDirpath}",
+            "env": {
+                "ASAN_OPTIONS": "suppressions=${workspaceFolder}/asan-suppressions.txt:fast_unwind_on_malloc=0:verbosity=1:abort_on_error=1",
+                "LSAN_OPTIONS": "suppressions=${workspaceFolder}/lsan-suppressions.txt",
+                "TSAN_OPTIONS": "verbosity=1:abort_on_error=1:suppressions=${workspaceFolder}/tsan-suppressions.txt",
+                "UBSAN_OPTIONS": "verbosity=1:abort_on_error=1",
+                "GRPC_VERBOSITY": "DEBUG",
+                "GRPC_ABORT_ON_LEAKS": "1"
+            }
+        }
+    ],
+    "editor.formatOnSave": true,
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "clangd.arguments": [
+        "--query-driver=/usr/bin/arm*g*",
+        "--background-index",
+        "--completion-style=detailed",
+        "--header-insertion=iwyu",
+        "-j=4",
+        "--pch-storage=memory",
+        "--malloc-trim",
+        "--log=info"
+    ],
+}
