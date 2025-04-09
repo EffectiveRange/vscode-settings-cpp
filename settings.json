@@ -29,7 +29,7 @@
             "env": {
                 "ASAN_OPTIONS": "suppressions=${workspaceFolder}/asan-suppressions.txt:fast_unwind_on_malloc=0:verbosity=1:abort_on_error=1",
                 "LSAN_OPTIONS": "suppressions=${workspaceFolder}/lsan-suppressions.txt",
-                "TSAN_OPTIONS": "verbosity=1:abort_on_error=1:suppressions=${workspaceFolder}/tsan-suppressions.txt",
+                "TSAN_OPTIONS": "second_deadlock_stack=1:verbosity=1:abort_on_error=1:suppressions=${workspaceFolder}/tsan-suppressions.txt",
                 "UBSAN_OPTIONS": "verbosity=1:abort_on_error=1",
                 "GRPC_VERBOSITY": "DEBUG",
                 "GRPC_ABORT_ON_LEAKS": "1"
