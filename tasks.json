@@ -14,7 +14,7 @@
         {
             "label": "generate lcov coverage",
             "type": "shell",
-            "command": "mkdir -p ${workspaceFolder}/coverage && cd ${workspaceFolder}/coverage && gcovr  --root .. -e \"../test.*\"  -e \"../build.*\" $([ -f ../exclude-coverage.txt ] && awk '{printf \"-e ../%s \", $0}' ../exclude-coverage.txt) --exclude-throw-branches --exclude-noncode-lines --exclude-function-lines --exclude-unreachable-branches --lcov lcov.info",
+            "command": "mkdir -p ${workspaceFolder}/coverage && cd ${workspaceFolder}/coverage && /usr/local/bin/gcovr  --root .. -e \"../test.*\"  -e \"../build.*\" $([ -f ../exclude-coverage.txt ] && awk '{printf \"-e ../%s \", $0}' ../exclude-coverage.txt) --exclude-throw-branches --exclude-noncode-lines --exclude-function-lines --exclude-unreachable-branches --lcov lcov.info",
             "problemMatcher": [
                 "$eslint-compact"
             ]
