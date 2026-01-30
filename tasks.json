@@ -6,7 +6,7 @@
         {
             "label": "clean lcov coverage",
             "type": "shell",
-            "command": "find ${workspaceFolder} -name \\*.gcda -exec rm -vf {} \\; ",
+            "command": "find ${workspaceFolder} -name \\*.gcda -exec rm -vf {} \\; && rm -rf ${workspaceFolder}/coverage",
             "problemMatcher": [
                 "$eslint-compact"
             ]
@@ -15,6 +15,14 @@
             "label": "generate lcov coverage",
             "type": "shell",
             "command": "mkdir -p ${workspaceFolder}/coverage && cd ${workspaceFolder}/coverage && /usr/local/bin/gcovr  --root .. -e \"../test.*\"  -e \"../build.*\" $([ -f ../exclude-coverage.txt ] && awk '{printf \"-e ../%s \", $0}' ../exclude-coverage.txt) --exclude-throw-branches --exclude-noncode-lines --exclude-function-lines --exclude-unreachable-branches --lcov lcov.info",
+            "problemMatcher": [
+                "$eslint-compact"
+            ]
+        },
+        {
+            "label": "generate html coverage",
+            "type": "shell",
+            "command": "mkdir -p ${workspaceFolder}/coverage && cd ${workspaceFolder}/coverage && /usr/local/bin/gcovr  --root .. -e \"../test.*\"  -e \"../build.*\" $([ -f ../exclude-coverage.txt ] && awk '{printf \"-e ../%s \", $0}' ../exclude-coverage.txt) --exclude-throw-branches --exclude-noncode-lines --exclude-function-lines --exclude-unreachable-branches --html --html-details -o index.html && python3 -m http.server 8080 --directory .",
             "problemMatcher": [
                 "$eslint-compact"
             ]
